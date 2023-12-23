@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Product = () => {
+ const [changes, setChanges] = useState({})
   const products = [
     {
       id: 1,
@@ -9,12 +10,12 @@ const Product = () => {
       availability: "In Stock",
       images:[
         {
-          variant: "black",
-          url: "https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg",
+          variant: "gray",
+          url: "../../../public/product/black_jacket.jpg",
         },
         {
           variant: "red",
-          url: "https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg",
+          url: "../../../public/product/red_jacket.jpg",
         },
       ],
       colors: ["gray", "red"],
@@ -29,12 +30,12 @@ const Product = () => {
       availability: "In Stock",
       images:[
         {
-          variant: "black",
-          url: "https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg",
+          variant: "gray",
+          url: "../../../public/product/black_jacket.jpg",
         },
         {
           variant: "red",
-          url: "https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg",
+          url: "../../../public/product/red_jacket.jpg",
         },
       ],
       colors: ["gray", "red"],
@@ -43,17 +44,25 @@ const Product = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt.",
     }
   ]
+  const handleProductChanges = (data,color) => {
+    setChanges({
+     id: data.id,
+     color: color
+    })
+  }
     return (
      <div className=' grid grid-cols-12 gap-x-6'>
        {
-          products.map((data,i)=> <div className="bg-white py-4 mt-[70px] shadow-lg rounded-[20px] col-span-4" key={i}>
+          products.map((data,i)=> <div className="bg-white py-4 mt-[70px] shadow-lg rounded-[20px] lg:col-span-4 md:col-span-6 col-span-12" key={i}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col -mx-4">
               <div className="md:flex-1 px-4">
-                <div className="max-h-[370px] w-[100%] rounded-lg bg-gray-300 mb-4">
+                <div className=" rounded-lg bg-gray-300 mb-4 min-h-[100px]">
                   <img
-                    className="w-full h-full object-cover"
-                    src={data.images[0].url}
+                    className="w-[100%]   h-[320px] object-cover "
+                    src={
+                      changes.id === data.id && changes.color === 'red' ? data.images[1].url : data.images[0].url
+                    }
                     alt="Product Image"
                   />
                 </div>
@@ -85,10 +94,20 @@ const Product = () => {
                   </span>
                   <div className="flex items-center mt-2">
                     {
-                      data.colors.map((color,i)=> color === 'gray' ? <button className="w-6 h-6 rounded-full bg-gray-800  mr-2" key={i} /> : <button className="w-6 h-6 rounded-full bg-red-500  mr-2" key={i} />)
+                      data.colors.map((color,i)=> color === 'gray' ? <button className={
+                        ` 
+                        w-6 h-6 rounded-full bg-gray-500  mr-2 ${changes.id === data.id && changes.color === 'gray' ? 'border-2 border-[#335dff]' : ''}
+                        `
 
+                      } key={i} 
+                      onClick={()=> handleProductChanges(data,color)}
+                      /> : <button className={`*:
+                      w-6 h-6 rounded-full bg-red-500  mr-2 ${changes.id === data.id && changes.color === 'red' ? 'border-2 border-[#335dff]' : ''}
+                        
+                      `} key={i} 
+                      onClick={()=> handleProductChanges(data,color)}
+                      />)
                     }
-                    
                   </div>
                 </div>
                 <div className="mb-4">

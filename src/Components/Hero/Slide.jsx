@@ -15,7 +15,7 @@ const Slide = ({ img, title, mainTitle, price }) => {
             <b className="text-[20px] md:text-[24px] lg:text-[30px]">{price}</b>
             .00
           </h3>
-          <div className="bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px] relative button_hover overflow-hidden w-[130px] z-[0]">
+          <div className="cursor-pointer bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px] relative button_hover overflow-hidden w-[130px] z-[0]">
             Shop Now
           </div>
         </div>

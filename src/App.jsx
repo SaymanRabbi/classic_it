@@ -8,7 +8,7 @@ function App() {
 
 
   return (
-   <div className=' max-w-[1170px] mx-auto px-4 py-2 lg:px-8 lg:py-4'>
+   <div className=' max-w-[1170px] mx-auto py-4'>
     <Routes>
         <Route path="/" element={<ProductPage />} />
         <Route path="/product" element={<ProductPage />} />
