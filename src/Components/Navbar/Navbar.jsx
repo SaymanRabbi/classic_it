@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {
     Navbar,
-    MobileNav,
+  
     Typography,
-    Button,
+
     IconButton,
     Collapse,
   } from "@material-tailwind/react";
  import logo from '../../../public/logo.png'
+import { Link } from 'react-router-dom';
 const NavbarContainer = () => {
     const [openNav, setOpenNav] = useState(false);
  
@@ -25,9 +26,9 @@ const NavbarContainer = () => {
             color="blue-gray"
             className="p-1"
           >
-            <a href="#" className="flex items-center">
+            <Link to='/product'  className="flex items-center">
               Product
-            </a>
+            </Link>
           </Typography>
         
       
@@ -42,21 +43,23 @@ const NavbarContainer = () => {
             href="#"
             className="mr-4 cursor-pointer py-1.5 max-w-[180px] w-[100%]"
           >
+              <Link to='/'>
               <img src={logo} className=' object-cover' />
+                </Link>
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-2">
-              <button
+              <Link to='/login'
                 className="hidden lg:inline-block bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px]"
               >
                 <span>Log In</span>
-              </button>
-              <button
+              </Link>
+              <Link to='/register'
                 className="hidden lg:inline-block bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px]"
               >
                 <span>Sign in</span>
-              </button>
+              </Link>
             </div>
             <IconButton
               variant="text"
@@ -100,12 +103,12 @@ const NavbarContainer = () => {
         <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-2">
-            <Button fullWidth variant="text"  className=" bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px]">
-              <span>Log In</span>
-            </Button>
-            <Button fullWidth variant="text"  className="bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px]">
-              <span>Sign in</span>
-            </Button>
+            <Link to='/login'  className=" bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px]">
+                <span>Log in</span>
+            </Link>
+            <Link to='/register'   className="bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px]">
+                <span>Sign in</span>
+            </Link>
           </div>
         </Collapse>
       </Navbar>
