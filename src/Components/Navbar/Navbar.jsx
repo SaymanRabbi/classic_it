@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Navbar.css'
 import {
     Navbar,
   
@@ -51,12 +52,12 @@ const NavbarContainer = () => {
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-2">
               <Link to='/login'
-                className="hidden lg:inline-block bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px]"
+                className=" z-0 hidden lg:inline-block bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px] relative button_hover overflow-hidden"
               >
                 <span>Log In</span>
               </Link>
               <Link to='/register'
-                className="hidden lg:inline-block bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px]"
+                className="hidden lg:inline-block bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white"
               >
                 <span>Sign in</span>
               </Link>
@@ -103,10 +104,10 @@ const NavbarContainer = () => {
         <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-2">
-            <Link to='/login'  className=" bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px]">
+            <Link to='/login'  className=" z-0  bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px] relative button_hover overflow-hidden">
                 <span>Log in</span>
             </Link>
-            <Link to='/register'   className="bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px]">
+            <Link to='/register'   className="bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white">
                 <span>Sign in</span>
             </Link>
           </div>
