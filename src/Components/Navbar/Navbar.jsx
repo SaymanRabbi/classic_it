@@ -12,10 +12,12 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Cart from '../Cart/Cart';
+import { useCartStore } from '../../../store/productStore';
 const NavbarContainer = () => {
   const path = useLocation().pathname;
     const [openNav, setOpenNav] = useState(false);
     const [openCart, setOpenCart] = useState(false);
+    const cartItems = useCartStore(state => state.cartItems)
   useEffect(() => {
     window.addEventListener(
       "resize",
@@ -67,7 +69,9 @@ const NavbarContainer = () => {
                  <ShoppingCartIcon className='h-8 w-8 text-[#335dff] cursor-pointer' 
                   onClick={() => setOpenCart(!openCart)}
                  />
-                 <span className=' absolute top-[-9px] left-[20px] text-gray-900 font-[900] text-[18px]'>0</span>
+                 <span className=' absolute top-[-9px] left-[20px] text-white font-[900] text-[18px] w-[20px] h-[20px] bg-[#335dff] flex items-center justify-center rounded'>{
+                    cartItems.length
+                 }</span>
                  </div>
             </div>
             <IconButton
@@ -118,7 +122,15 @@ const NavbarContainer = () => {
             <Link to='/register'   className="bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white">
                 <span>Sign in</span>
             </Link>
-            <ShoppingCartIcon className='h-8 w-8 text-[#335dff] cursor-pointer' />
+            <div className=' relative'>
+                 <ShoppingCartIcon className='h-8 w-8 text-[#335dff] cursor-pointer' 
+                  onClick={() => setOpenCart(!openCart)}
+                 />
+                 <span className=' absolute top-[-9px] left-[20px] text-white font-[900] text-[18px] w-[20px] h-[20px] bg-[#335dff] flex items-center justify-center rounded '>{
+                    cartItems.length
+                 
+                 }</span>
+                 </div>
           </div>
         </Collapse>
         {

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useProductStore } from '../../../store/productStore';
+import { useCartStore, useProductStore } from '../../../store/productStore';
 
 const ProductDetails = () => {
   const getProducts= useProductStore(state => state.getProducts)
+  const addToCart = useCartStore(state => state.addToCart)
   const {id} = useParams()
   const {product} = useProductStore(state => state.products)
   const [getProduct,setGetProduct] =useState()
@@ -33,6 +34,18 @@ const ProductDetails = () => {
      index: i,
     })
   }
+  const addProductCart = () => {
+    const product={
+      _id: getProduct._id,
+      name: getProduct.name,
+      price: getProduct.price,
+      image: changes.id === getProduct?._id && changes.color === 'red' ? getProduct?.images[1].url : getProduct?.images[0].url ,
+      color: changes.color || 'gray',
+      size: getProduct.size[sizeindex.index ||0],
+      quantity: 1,
+    }
+    addToCart(product)
+  }
   return (
         <div className="bg-white py-8 mt-[70px]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,12 +62,16 @@ const ProductDetails = () => {
               </div>
               <div className="flex -mx-2 mb-4">
                 <div className="w-1/2 px-2">
-                  <button className="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                  <button className="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
+                  onClick={addProductCart}
+                  >
                     Add to Cart
                   </button>
                 </div>
                 <div className="w-1/2 px-2">
-                  <button className="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-full font-bold hover:bg-gray-300 ">
+                  <button className="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-full font-bold hover:bg-gray-300 "
+                  onClick={addProductCart}
+                  >
                     Add to Wishlist
                   </button>
                 </div>
