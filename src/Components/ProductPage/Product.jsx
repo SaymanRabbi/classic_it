@@ -7,7 +7,6 @@ const Product = () => {
  const [changes, setChanges] = useState({})
  const [sizeindex, setSizeindex] = useState({})
  const {success,product:products} = useProductStore(state => state.products)
- console.log(products)
  useEffect(()=> {
     getProducts()
  },[getProducts])

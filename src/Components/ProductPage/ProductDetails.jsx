@@ -1,19 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useProductStore } from '../../../store/productStore';
 
 const ProductDetails = () => {
-  // get product id using useParams()
+  const getProducts= useProductStore(state => state.getProducts)
   const {id} = useParams()
-  console.log(id)
-    return (
+  const {product} = useProductStore(state => state.products)
+  const [getProduct,setGetProduct] =useState()
+  const [changes, setChanges] = useState({})
+  const [sizeindex, setSizeindex] = useState({})
+  useEffect(()=> {
+    if(id){
+      getProducts()
+     }
+  },[id])
+  useEffect(()=> {
+    if(product?.length > 0){
+      const newProduct = product?.find((item)=> item._id === id)
+      setGetProduct(newProduct)}
+
+    },[product])
+    
+  const handleProductChanges = (data,color) => {
+    setChanges({
+     id: data._id,
+     color: color,
+    })
+  }
+  const handleSizeChanges = (data,i) => {
+    setSizeindex({
+     id: data._id,
+     index: i,
+    })
+  }
+  return (
         <div className="bg-white py-8 mt-[70px]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row -mx-4">
             <div className="md:flex-1 px-4">
-              <div className="h-[460px] rounded-lg bg-gray-300 mb-4">
+              <div className=" rounded-lg flex justify-center mb-4 min-h-[100px]">
                 <img
-                  className="w-full h-full object-cover"
-                  src="https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg"
+                  className="h-[380px] object-cover"
+                  src={
+                    changes.id === getProduct?._id && changes.color === 'red' ? getProduct?.images[1].url : getProduct?.images[0].url
+                  }
                   alt="Product Image"
                 />
               </div>
@@ -32,20 +62,24 @@ const ProductDetails = () => {
             </div>
             <div className="md:flex-1 px-4">
               <h2 className="text-2xl font-bold text-gray-800  mb-2">
-                Product Name
+               {getProduct?.name}
               </h2>
               <div className="flex mb-4">
                 <div className="mr-4">
                   <span className="font-bold text-gray-700 ">
                     Price:
                   </span>
-                  <span className="text-gray-600 ">$29.99</span>
+                  <span className="text-gray-600 ">{
+                    getProduct?.price
+                  }</span>
                 </div>
                 <div>
                   <span className="font-bold text-gray-700 ">
                     Availability:
                   </span>
-                  <span className="text-gray-600 ">In Stock</span>
+                  <span className="text-gray-600 ">{
+                    getProduct?.availability
+                  }</span>
                 </div>
               </div>
               <div className="mb-4">
@@ -53,30 +87,39 @@ const ProductDetails = () => {
                   Select Color:
                 </span>
                 <div className="flex items-center mt-2">
-                  <button className="w-6 h-6 rounded-full bg-gray-500  mr-2" />
-                  <button className="w-6 h-6 rounded-full bg-red-500  mr-2" />
-                </div>
+                     {
+                       getProduct?.colors?.map((color,i)=> color === 'gray' ? <button className={
+                         ` 
+                         w-6 h-6 rounded-full bg-gray-500  mr-2 ${changes.id === getProduct._id && changes.color === 'gray' ? 'border-2 border-[#335dff]' : ''}
+                         `
+ 
+                       } key={i} 
+                       onClick={()=> handleProductChanges(getProduct,color)}
+                       /> : <button className={`
+                       w-6 h-6 rounded-full bg-red-500  mr-2 ${changes.id === getProduct._id && changes.color === 'red' ? 'border-2 border-[#335dff]' : ''}
+                         
+                       `} key={i} 
+                       onClick={()=> handleProductChanges(getProduct,color)}
+                       />)
+                     }
+                   </div>
               </div>
               <div className="mb-4">
                 <span className="font-bold text-gray-700">
                   Select Size:
                 </span>
                 <div className="flex items-center mt-2">
-                  <button className="bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400">
-                    S
-                  </button>
-                  <button className="bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400">
-                    M
-                  </button>
-                  <button className="bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 ">
-                    L
-                  </button>
-                  <button className="bg-gray-300  text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400">
-                    XL
-                  </button>
-                  <button className="bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 ">
-                    XXL
-                  </button>
+                {
+                       getProduct?.size.map((size,i)=> <button className={`
+                       bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 
+                         ${sizeindex.id === getProduct._id && sizeindex.index === i ? 'border-2 border-[#335dff]' : ' border-2 border-transparent'}
+ 
+                       `} key={i}
+                       onClick={()=> handleSizeChanges(getProduct,i)}
+                       >
+                       {size}
+                     </button>)
+                     }
                 </div>
               </div>
               <div>
@@ -84,13 +127,7 @@ const ProductDetails = () => {
                   Product Description:
                 </span>
                 <p className="text-gray-600 text-sm mt-2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                  ante justo. Integer euismod libero id mauris malesuada tincidunt.
-                  Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue
-                  vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae
-                  nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum
-                  lacinia, non sagittis mauris blandit. Morbi fermentum libero vel
-                  nisl suscipit, nec tincidunt mi consectetur.
+                  {getProduct?.description}
                 </p>
               </div>
             </div>
