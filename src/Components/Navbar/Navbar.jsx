@@ -37,7 +37,7 @@ const NavbarContainer = () => {
         </ul>
       );
     return (
-        <Navbar className="sticky top-0 z-10 h-max w-[100%] rounded-none px-4 py-2 lg:px-8 lg:py-4   text-gray-900 max-w-[1170px] mx-auto bg-transparent font-[700]">
+        <Navbar className="sticky top-0 z-10 h-max w-[100%] px-4 py-2 lg:px-8 lg:py-4   text-gray-900 max-w-[1170px] mx-auto font-[700] bg-[#f8fafc] rounded-[10px]">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
