@@ -1,14 +1,15 @@
 
 import './App.css'
-
+import { Routes,Route } from 'react-router-dom'
+import ProductPage from './Components/ProductPage/ProductPage'
 function App() {
 
 
   return (
    <>
-    <h2 className=' text-red-300'>
-      This is a React App
-    </h2>
+    <Routes>
+        <Route path="/" element={<ProductPage />} />
+    </Routes>
     </>
   )
 }
