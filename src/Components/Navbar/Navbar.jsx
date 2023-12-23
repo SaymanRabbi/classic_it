@@ -9,8 +9,9 @@ import {
     Collapse,
   } from "@material-tailwind/react";
  import logo from '../../../public/logo.png'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 const NavbarContainer = () => {
+  const path = useLocation().pathname;
     const [openNav, setOpenNav] = useState(false);
  
   useEffect(() => {
@@ -27,7 +28,7 @@ const NavbarContainer = () => {
             color="blue-gray"
             className="p-1"
           >
-            <Link to='/product'  className="flex items-center">
+            <Link to='/product'  className={`flex items-center ${path ==='/' || path==='/product'?"text-[#335dff]":""}`}>
               Product
             </Link>
           </Typography>
