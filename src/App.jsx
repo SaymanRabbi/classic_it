@@ -6,11 +6,11 @@ function App() {
 
 
   return (
-   <>
+   <div className=' max-w-[1170px] mx-auto'>
     <Routes>
         <Route path="/" element={<ProductPage />} />
     </Routes>
-    </>
+    </div>
   )
 }
 
