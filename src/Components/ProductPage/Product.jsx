@@ -6,17 +6,17 @@ const Product = () => {
   const products = [
     {
       id: 1,
-      name: "Mordern Jackets",
+      name: "Women's Hooded Packable Jacket",
       price: 29.99,
       availability: "In Stock",
       images:[
         {
           variant: "gray",
-          url: "../../../public/product/black_jacket.jpg",
+          url: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703340497/OIP_wf1gvw.jpg",
         },
         {
           variant: "red",
-          url: "../../../public/product/red_jacket.jpg",
+          url: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703340305/OIP_ctt65w.jpg",
         },
       ],
       colors: ["gray", "red"],
@@ -26,17 +26,57 @@ const Product = () => {
     },
     {
       id: 2,
-      name: "Mordern Jackets",
+      name: "AG Jeans EmRata x AG Jerrie Jacket",
+      price: 39.99,
+      availability: "In Stock",
+      images:[
+        {
+          variant: "gray",
+          url: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703341580/OIP_fyoysl.jpg",
+        },
+        {
+          variant: "red",
+          url: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703341678/3c9bd8efd98e44ebd91c9e528f97737b_rwj8dg.jpg",
+        },
+      ],
+      colors: ["gray", "red"],
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt.",
+    },
+    {
+      id: 3,
+      name: "Women's Hooded Packable Jacket",
       price: 29.99,
       availability: "In Stock",
       images:[
         {
           variant: "gray",
-          url: "../../../public/product/black_jacket.jpg",
+          url: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703340497/OIP_wf1gvw.jpg",
         },
         {
           variant: "red",
-          url: "../../../public/product/red_jacket.jpg",
+          url: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703340305/OIP_ctt65w.jpg",
+        },
+      ],
+      colors: ["gray", "red"],
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt.",
+    },
+    {
+      id: 4,
+      name: "AG Jeans EmRata x AG Jerrie Jacket",
+      price: 39.99,
+      availability: "In Stock",
+      images:[
+        {
+          variant: "gray",
+          url: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703341580/OIP_fyoysl.jpg",
+        },
+        {
+          variant: "red",
+          url: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703341678/3c9bd8efd98e44ebd91c9e528f97737b_rwj8dg.jpg",
         },
       ],
       colors: ["gray", "red"],
@@ -64,9 +104,9 @@ const Product = () => {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col -mx-4">
               <div className="md:flex-1 px-4">
-                <div className=" rounded-lg bg-gray-300 mb-4 min-h-[100px]">
+                <div className=" rounded-lg flex justify-center mb-4 min-h-[100px]">
                   <img
-                    className="w-[100%]   h-[320px] object-cover "
+                    className="h-[320px] object-cover "
                     src={
                       changes.id === data.id && changes.color === 'red' ? data.images[1].url : data.images[0].url
                     }
@@ -76,7 +116,7 @@ const Product = () => {
                 
               </div>
               <div className="md:flex-1 px-4">
-                <h2 className="text-2xl font-bold text-gray-800  mb-2">
+                <h2 className="text-[17px] font-bold text-gray-800  mb-2">
                   {data.name}
                 </h2>
                 <div className="flex mb-4">
@@ -125,7 +165,7 @@ const Product = () => {
                     {
                       data.sizes.map((size,i)=> <button className={`
                       bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 
-                        ${sizeindex.id === data.id && sizeindex.index === i ? 'border-2 border-[#335dff]' : ''}
+                        ${sizeindex.id === data.id && sizeindex.index === i ? 'border-2 border-[#335dff]' : ' border-2 border-transparent'}
 
                       `} key={i}
                       onClick={()=> handleSizeChanges(data,i)}
