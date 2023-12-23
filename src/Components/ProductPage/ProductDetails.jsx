@@ -1,6 +1,10 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const ProductDetails = () => {
+  // get product id using useParams()
+  const {id} = useParams()
+  console.log(id)
     return (
         <div className="bg-white py-8 mt-[70px]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,10 +34,6 @@ const ProductDetails = () => {
               <h2 className="text-2xl font-bold text-gray-800  mb-2">
                 Product Name
               </h2>
-              <p className="text-gray-600  text-sm mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante
-                justo. Integer euismod libero id mauris malesuada tincidunt.
-              </p>
               <div className="flex mb-4">
                 <div className="mr-4">
                   <span className="font-bold text-gray-700 ">
@@ -53,10 +53,8 @@ const ProductDetails = () => {
                   Select Color:
                 </span>
                 <div className="flex items-center mt-2">
-                  <button className="w-6 h-6 rounded-full bg-gray-800  mr-2" />
+                  <button className="w-6 h-6 rounded-full bg-gray-500  mr-2" />
                   <button className="w-6 h-6 rounded-full bg-red-500  mr-2" />
-                  <button className="w-6 h-6 rounded-full bg-blue-500  mr-2" />
-                  <button className="w-6 h-6 rounded-full bg-yellow-500  mr-2" />
                 </div>
               </div>
               <div className="mb-4">
