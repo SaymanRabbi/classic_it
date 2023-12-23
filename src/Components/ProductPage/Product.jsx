@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const Product = () => {
  const [changes, setChanges] = useState({})
+ const [sizeindex, setSizeindex] = useState({})
   const products = [
     {
       id: 1,
@@ -47,7 +48,13 @@ const Product = () => {
   const handleProductChanges = (data,color) => {
     setChanges({
      id: data.id,
-     color: color
+     color: color,
+    })
+  }
+  const handleSizeChanges = (data,i) => {
+    setSizeindex({
+     id: data.id,
+     index: i,
     })
   }
     return (
@@ -101,7 +108,7 @@ const Product = () => {
 
                       } key={i} 
                       onClick={()=> handleProductChanges(data,color)}
-                      /> : <button className={`*:
+                      /> : <button className={`
                       w-6 h-6 rounded-full bg-red-500  mr-2 ${changes.id === data.id && changes.color === 'red' ? 'border-2 border-[#335dff]' : ''}
                         
                       `} key={i} 
@@ -116,11 +123,16 @@ const Product = () => {
                   </span>
                   <div className="flex items-center mt-2">
                     {
-                      data.sizes.map((size,i)=> <button className="bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400" key={i}>
+                      data.sizes.map((size,i)=> <button className={`
+                      bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 
+                        ${sizeindex.id === data.id && sizeindex.index === i ? 'border-2 border-[#335dff]' : ''}
+
+                      `} key={i}
+                      onClick={()=> handleSizeChanges(data,i)}
+                      >
                       {size}
                     </button>)
                     }
-                   
                   </div>
                 </div>
               </div>
