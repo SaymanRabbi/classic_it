@@ -10,10 +10,12 @@ import {
   } from "@material-tailwind/react";
  import logo from '../../../public/logo.png'
 import { Link, useLocation } from 'react-router-dom';
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
+import Cart from '../Cart/Cart';
 const NavbarContainer = () => {
   const path = useLocation().pathname;
     const [openNav, setOpenNav] = useState(false);
- 
+    const [openCart, setOpenCart] = useState(false);
   useEffect(() => {
     window.addEventListener(
       "resize",
@@ -32,8 +34,6 @@ const NavbarContainer = () => {
               Product
             </Link>
           </Typography>
-        
-      
         
         </ul>
       );
@@ -62,6 +62,13 @@ const NavbarContainer = () => {
               >
                 <span>Sign in</span>
               </Link>
+              
+                 <div className='  hidden lg:inline-block relative'>
+                 <ShoppingCartIcon className='h-8 w-8 text-[#335dff] cursor-pointer' 
+                  onClick={() => setOpenCart(!openCart)}
+                 />
+                 <span className=' absolute top-[-9px] left-[20px] text-gray-900 font-[900] text-[18px]'>0</span>
+                 </div>
             </div>
             <IconButton
               variant="text"
@@ -111,8 +118,12 @@ const NavbarContainer = () => {
             <Link to='/register'   className="bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white">
                 <span>Sign in</span>
             </Link>
+            <ShoppingCartIcon className='h-8 w-8 text-[#335dff] cursor-pointer' />
           </div>
         </Collapse>
+        {
+          openCart && <Cart setOpenCart={setOpenCart} />
+        }
       </Navbar>
     );
 };
