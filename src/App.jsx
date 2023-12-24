@@ -5,6 +5,7 @@ import ProductPage from './Components/ProductPage/ProductPage'
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
 import ProductDetails from './Components/ProductPage/ProductDetails'
+import NotFound from './Components/NotFound/NotFound'
 function App() {
 
 
@@ -14,7 +15,7 @@ function App() {
         <Route path="/" element={<ProductPage />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-        {/* <Route path="*" element={<h1>Not Found</h1>} /> */}
+        <Route path="*" element={<NotFound/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
     </Routes>
