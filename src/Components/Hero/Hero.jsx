@@ -18,21 +18,21 @@ const Hero = () => {
   const slideData = [
     {
       id: 0,
-      img: "../../../public/banner-1.jpg",
+      img: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703396445/banner-2_q9qyrr.jpg",
       title: "Trending Item",
       mainTitle: "WOMEN'S LATEST FASHION SALE",
       price: "$20",
     },
     {
       id: 1,
-      img: "../../../public/banner-2.jpg",
+      img: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703396445/banner-1_uhl6rf.jpg",
       title: "Trending Accessories",
       mainTitle: "MODERN SUNGLASSES",
       price: "$15",
     },
     {
       id: 2,
-      img: "../../../public/banner-3.jpg",
+      img: "https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703396445/banner-3_kuor6y.jpg",
       title: "Sale Offer",
       mainTitle: "NEW FASHION SUMMER SALE",
       price: "$30",

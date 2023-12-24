@@ -10,7 +10,7 @@ const Testimonial = () => {
                 <div className="text-center flex flex-col items-center gap-1">
                   <img
                     className="rounded-full inline-block"
-                    src="../../../public/user.jpg"
+                    src="https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703396446/user_rsxzzn.jpg"
                     width={80}
                     height={80}
                     alt="dp"
@@ -19,7 +19,7 @@ const Testimonial = () => {
                   <p>CEO & Founder Invision</p>
                   <img
                     className="inline-block py-2"
-                    src="../../../public/user.jpg"
+                    src="https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703396446/user_rsxzzn.jpg"
                     width={30}
                     height={30}
                     alt="quotes"
@@ -31,7 +31,7 @@ const Testimonial = () => {
                 </div>
               </div>
     
-              <div className=" bg-[url(../../../public/cta-banner.jpg)] bg-cover h-[500px] rounded-2xl grid place-items-center">
+              <div className=" bg-[url(https://res.cloudinary.com/dnr5u3jpb/image/upload/v1703396445/cta-banner_cmyv7t.jpg)] bg-cover h-[500px] rounded-2xl grid place-items-center">
                 <div className="bg-[#ffffffab] min-w-[270px] sm:min-w-[300px] md:min-w-[500px] rounded-xl py-8 sm:px-8 px-2 grid place-items-center gap-3">
                   <button className="bg-blackish text-white p-2 rounded-md">
                     25% DISCOUNT
