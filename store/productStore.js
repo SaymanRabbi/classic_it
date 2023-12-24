@@ -33,28 +33,23 @@ export const useCartStore = zustand((set) => ({
         });
     },
     removeFromCart: (product) => {
-       set((state)=>{
-        if (state.cartItems.find((x) => x._id === product._id)) {
+        set((state) => {
+          const existingProduct = state.cartItems.find((x) => x._id === product._id);
+    
+          if (existingProduct && existingProduct.quantity > 1) {
             return {
-                cartItems: state.cartItems.map((x) =>
-                    {
-                        if(x._id === product._id && x.quantity >= 1){
-                            return { ...x, quantity: x.quantity - 1 }
-                        }
-                        else if(x._id === product._id && x.quantity === 0){
-                            return { ...x, quantity: x.quantity }
-                        }
-                        else{
-                            return x;
-                        }
-                    }
-                )
+              cartItems: state.cartItems.map((x) =>
+                x._id === product._id ? { ...x, quantity: x.quantity - 1 } : x
+              ),
             };
-        } else {
-            return { cartItems: [...state.cartItems] };
-        }
-       })
-    },
+          } else {
+            // Remove the product from the cart if quantity is 0 or 1
+            return {
+              cartItems: state.cartItems.filter((x) => x._id !== product._id),
+            };
+          }
+        });
+      },
 
 }));
     
