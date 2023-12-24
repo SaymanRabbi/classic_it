@@ -7,7 +7,7 @@ export const useProductStore = zustand((set) => ({
     getProducts: async() => {
         try {
             set({isLoading:true});
-            const url = `http://localhost:5000/api/v1/get_product`;
+            const url = `https://classic-it.onrender.com/api/v1/get_product`;
             const resp = await fetch(url);
             const data = await resp.json();
             set({products:data, isLoading:false});

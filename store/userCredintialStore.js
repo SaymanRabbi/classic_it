@@ -7,7 +7,7 @@ export const useUserStore = create((set) => ({
     createUser: async (user) => {
         try {
             set({isLoading:true});
-            const url = `http://localhost:5000/api/v1/create_user`;
+            const url = `https://classic-it.onrender.com/api/v1/create_user`;
             const resp = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -26,7 +26,7 @@ export const useUserStore = create((set) => ({
     getUser: async (user) => {
         try {
             set({isLoading:true});
-            const url = `http://localhost:5000/api/v1/get_user`;
+            const url = `https://classic-it.onrender.com/api/v1/get_user`;
             const resp = await fetch(url, {
                 method: 'POST',
                 headers: {
