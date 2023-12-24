@@ -4,6 +4,7 @@ import { useCartStore, useProductStore } from '../../../store/productStore';
 
 const ProductDetails = () => {
   const getProducts= useProductStore(state => state.getProducts)
+  const cartItems = useCartStore(state => state.cartItems)
   const addToCart = useCartStore(state => state.addToCart)
   const {id} = useParams()
   const {product} = useProductStore(state => state.products)
@@ -21,7 +22,9 @@ const ProductDetails = () => {
       setGetProduct(newProduct)}
 
     },[product])
-    
+    useEffect(() => {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }, [cartItems]);
   const handleProductChanges = (data,color) => {
     setChanges({
      id: data._id,

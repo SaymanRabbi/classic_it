@@ -9,21 +9,27 @@ import {
     Collapse,
   } from "@material-tailwind/react";
  import logo from '../../../public/logo.png'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Cart from '../Cart/Cart';
 import { useCartStore } from '../../../store/productStore';
 const NavbarContainer = () => {
   const path = useLocation().pathname;
+  const navigations = useNavigate();
     const [openNav, setOpenNav] = useState(false);
     const [openCart, setOpenCart] = useState(false);
     const cartItems = useCartStore(state => state.cartItems)
+    const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false),
     );
   }, []);
+  const logOut = () => {
+    localStorage.removeItem('user');
+    navigations('/login');
+  }
     const navList = (
         <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
           <Typography
@@ -54,16 +60,27 @@ const NavbarContainer = () => {
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-2">
-              <Link to='/login'
-                className=" z-0 hidden lg:inline-block bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px] relative button_hover overflow-hidden"
-              >
-                <span>Log In</span>
-              </Link>
-              <Link to='/register'
-                className="hidden lg:inline-block bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white"
-              >
-                <span>Sign in</span>
-              </Link>
+                {
+                  user?.user?.email ? <span className=' text-sm hidden lg:inline-block'>
+                    {user?.user?.name}
+                  </span>:<Link to='/login'
+                  className=" z-0 hidden lg:inline-block bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px] relative button_hover overflow-hidden"
+                >
+                  <span>Log In</span>
+                </Link>
+                }
+               {
+                  user?.user?.email ? <button 
+                  className="hidden lg:inline-block bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white"
+                 onClick={logOut}
+                >
+                  <span>Logout</span>
+                </button>:<Link to='/register'
+                  className="hidden lg:inline-block bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white"
+                >
+                  <span>Sign in</span>
+                </Link>
+               }
               
                  <div className='  hidden lg:inline-block relative'>
                  <ShoppingCartIcon className='h-8 w-8 text-[#335dff] cursor-pointer' 
@@ -116,12 +133,27 @@ const NavbarContainer = () => {
         <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-2">
-            <Link to='/login'  className=" z-0  bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px] relative button_hover overflow-hidden">
-                <span>Log in</span>
+            {
+              user?.user?.email ? <span className=' text-sm'>
+                {user?.user?.name}
+              </span>:<Link to='/login'
+              className="  bg-[#335dff] text-[16px] text-white font-[500] py-[9px] px-[25px] rounded-[25px] relative button_hover overflow-hidden"
+            >
+              <span>Log In</span>
             </Link>
-            <Link to='/register'   className="bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white">
-                <span>Sign in</span>
+            }
+            {
+              user?.user?.email ? <button 
+              className=" bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white"
+             onClick={logOut}
+            >
+              <span>Logout</span>
+            </button>:<Link to='/register'
+              className=" bg-gray-300 text-[16px] text-[#335dff] font-[500] py-[9px] px-[25px] rounded-[25px] button_hover_regsiter relative overflow-hidden z-0 hover:text-white"
+            >
+              <span>Sign in</span>
             </Link>
+            }
             <div className=' relative'>
                  <ShoppingCartIcon className='h-8 w-8 text-[#335dff] cursor-pointer' 
                   onClick={() => setOpenCart(!openCart)}

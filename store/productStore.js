@@ -12,13 +12,15 @@ export const useProductStore = zustand((set) => ({
             const data = await resp.json();
             set({products:data, isLoading:false});
         } catch (error) {
+           
              set({error:error.message});
         }
     }
 }));
 
 export const useCartStore = zustand((set) => ({
-    cartItems: [],
+    cartItems: JSON.parse(localStorage.getItem("cart") || "[]"),
+ 
     addToCart: (product) => {
         set((state) =>{
             if (state.cartItems.find((x) => x._id === product._id)) {
@@ -50,6 +52,5 @@ export const useCartStore = zustand((set) => ({
           }
         });
       },
-
 }));
     

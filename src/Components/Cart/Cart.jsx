@@ -1,20 +1,24 @@
-import React, { useState,Fragment } from 'react';
+import React, { useState,Fragment, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../../../store/productStore';
 const Cart = ({setOpenCart}) => {
     const [open, setOpen] = useState(true)
+
     const cartItems = useCartStore(state => state.cartItems)
     const removeFromCart = useCartStore(state => state.removeFromCart)
-  
+    useEffect(() => {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }, [cartItems]);
         const toggleCart = () => {
             setOpenCart(false)
             setOpen(false)
         }
         const removeProduct = (product) => {
             removeFromCart(product)
-        }
+            setLocalStorage()        }
+ 
   return (
     <Transition.Root show={open} as={Fragment}
      
